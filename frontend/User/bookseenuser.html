@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Send Data</h2>
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="email" placeholder="Email">
+    <button class="btn" onclick="sendData()">Submit</button>
+</div>
+
+<script>
+    async function sendData() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        if (!name || !email) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        const data = { name, email };
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/book-seen-by-user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const books = await response.json();
+                localStorage.setItem("bookData", JSON.stringify(books)); // Store data
+                window.location.href = "Book.html"; // Redirect to books page
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || errorData.description);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Failed to send data.");
+        }
+    }
+</script>
+</body>
+</html>
+

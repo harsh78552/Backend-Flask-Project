@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            margin: 0;
+        }
+
+        .container {
+            background: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: red;
+        }
+
+        input, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            border: none;
+        }
+
+        button {
+            background-color: green;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: white;
+        }
+
+        #message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add a New Book</h2>
+    <form id="bookForm">
+        <input type="text" id="BooksTitle" placeholder="Book Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="text" id="genre" placeholder="Genre" required>
+        <input type="date" id="published_date" required>
+        <input type="number" id="copies" placeholder="Available Copies" required>
+        <input type="file" id="image" accept="image/*" required>
+        <button type="submit">Add Book</button>
+    </form>
+    <p id="message"></p>
+</div>
+
+<script>
+    document.getElementById('bookForm').addEventListener('submit', async function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData();
+        formData.append("BooksTitle", document.getElementById('BooksTitle').value.trim());
+        formData.append("author", document.getElementById('author').value.trim());
+        formData.append("genre", document.getElementById('genre').value.trim());
+        formData.append("published_date", document.getElementById('published_date').value);
+        formData.append("available_copies", document.getElementById('copies').value);
+        formData.append("image", document.getElementById('image').files[0]);
+
+        const messageElement = document.getElementById('message');
+        messageElement.textContent = "Uploading...";
+        messageElement.className = "";
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/add-book', {
+                method: 'POST',
+                credentials: 'include',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                messageElement.textContent = result.message || "Book added successfully!";
+                messageElement.className = "success";
+                document.getElementById('bookForm').reset();
+            } else {
+                messageElement.textContent = result.error || "Failed to add book.";
+                messageElement.className = "error";
+            }
+        } catch (error) {
+            messageElement.textContent = "Error adding book.";
+            messageElement.className = "error";
+        }
+    });
+</script>
+
+</body>
+</html>

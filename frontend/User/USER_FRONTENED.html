@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7dff, #68a3ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn, .btn-link {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn {
+            background-color: #007bff;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-link {
+            background-color: #28a745;
+        }
+
+        .btn-link:hover {
+            background-color: #218838;
+        }
+
+        .btn:active, .btn-link:active {
+            transform: scale(0.98);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome to the Book Library</h2>
+
+
+    <button class="btn-link" onclick="location.href='bookseenuser.html'">Book Seen By user</button>
+</div>
+
+</body>
+</html>

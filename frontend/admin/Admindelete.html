@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Book</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Container */
+        .container {
+            background: pink;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Label Style */
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+
+        /* Input Field Style */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+        }
+
+        /* Button Style */
+        button {
+            padding: 12px 30px;
+            background-color: pink;
+            color: black;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+        }
+
+        /* Response Message */
+        #response-message {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Delete Book</h1>
+    <form id="delete-form">
+        <label for="book-title">Enter Book Title:</label>
+        <input type="text" id="book-title" placeholder="Enter Book Title" required>
+        <button type="submit" id="delete-btn">Delete Book</button>
+    </form>
+    <p id="response-message"></p>
+</div>
+
+<script>
+    document.getElementById('delete-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const bookTitle = document.getElementById('book-title').value;
+        const responseMessage = document.getElementById('response-message');
+
+        if (!bookTitle) {
+            responseMessage.textContent = "Please enter a book title.";
+            responseMessage.className = 'error';
+            return;
+        }
+
+        const url = `http://127.0.0.1:5000/admin-book-delete?BooksTitle=${encodeURIComponent(bookTitle)}`;
+
+        fetch(url, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Deleted successfully...") {
+                responseMessage.textContent = "Book deleted successfully!";
+                responseMessage.className = 'success';
+                }
+            } else {
+                responseMessage.textContent = "Error: " + data.message;
+                responseMessage.className = 'error';
+            }
+        })
+        .catch(error => {
+            responseMessage.textContent = "Error: Unable to delete book.";
+            responseMessage.className = 'error';
+        });
+    });
+</script>
+</body>
+</html>

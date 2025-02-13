@@ -1,0 +1,283 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Update Book Copies</title>-->
+<!--    <style>-->
+<!--        /* styles.css */-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f4f4f4;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            height: 100vh;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            background-color: white;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            text-align: center;-->
+<!--            width: 300px;-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        input {-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--            width: 80%;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--        }-->
+
+<!--        button {-->
+<!--            padding: 10px 20px;-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 4px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        button:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--        #response-message {-->
+<!--            margin-top: 10px;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <h1>Update Book Copies</h1>-->
+<!--        <form id="update-form">-->
+<!--            <label for="book-title">Enter Book Title:</label>-->
+<!--            <input type="text" id="book-title" placeholder="Enter Book Title" required>-->
+
+<!--            <label for="available-copies">Available Copies:</label>-->
+<!--            <input type="number" id="available-copies" placeholder="Enter Available Copies" required>-->
+
+<!--            <button type="submit" id="update-btn">Update Book</button>-->
+<!--        </form>-->
+<!--        <p id="response-message"></p>-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        // script.js-->
+<!--        document.getElementById('update-form').addEventListener('submit', function(event) {-->
+<!--            event.preventDefault(); // Prevent the form from reloading the page-->
+
+<!--            const bookTitle = document.getElementById('book-title').value;-->
+<!--            const availableCopies = document.getElementById('available-copies').value;-->
+<!--            const responseMessage = document.getElementById('response-message');-->
+
+<!--            if (!bookTitle || !availableCopies) {-->
+<!--                responseMessage.textContent = "Please fill in all fields.";-->
+<!--                responseMessage.style.color = 'red';-->
+<!--                return;-->
+<!--            }-->
+
+<!--            // API URL (Updated to your local API)-->
+<!--            const url = `http://127.0.0.1:5000/admin-update-book`;-->
+
+<!--            // Data to send in the request-->
+<!--            const data = {-->
+<!--                BooksTitle: bookTitle,-->
+<!--                available_copies: availableCopies-->
+<!--            };-->
+
+<!--            // Perform the POST request to update the book-->
+<!--            fetch(url, {-->
+<!--                method: 'PUT',-->
+<!--                credentials: 'include',-->
+<!--                headers: {-->
+<!--                    // Replace with actual JWT token-->
+<!--                    'Content-Type': 'application/json',-->
+<!--                },-->
+<!--                body: JSON.stringify(data)-->
+<!--            })-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                if (data.message === "Book updated successfully.") {-->
+<!--                    responseMessage.textContent = "Book updated successfully!";-->
+<!--                    responseMessage.style.color = 'green';-->
+<!--                } else {-->
+<!--                    responseMessage.textContent = "Error: " + data.message;-->
+<!--                    responseMessage.style.color = 'red';-->
+<!--                }-->
+<!--            })-->
+<!--            .catch(error => {-->
+<!--                responseMessage.textContent = "Error: Unable to update book.";-->
+<!--                responseMessage.style.color = 'red';-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book Copies</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Container */
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        /* Label Style */
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+
+        /* Input Field Style */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+        }
+
+        /* Button Style */
+        button {
+            padding: 12px 30px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Response Message */
+        #response-message {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Book Copies</h1>
+        <form id="update-form">
+            <label for="book-title">Enter Book Title:</label>
+            <input type="text" id="book-title" placeholder="Enter Book Title" required>
+
+            <label for="available-copies">Available Copies:</label>
+            <input type="number" id="available-copies" placeholder="Enter Available Copies" required>
+
+            <button type="submit" id="update-btn">Update Book</button>
+        </form>
+        <p id="response-message"></p>
+    </div>
+
+    <script>
+        document.getElementById('update-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const bookTitle = document.getElementById('book-title').value;
+            const availableCopies = document.getElementById('available-copies').value;
+            const responseMessage = document.getElementById('response-message');
+
+            if (!bookTitle || !availableCopies) {
+                responseMessage.textContent = "Please fill in all fields.";
+                responseMessage.className = 'error';
+                return;
+            }
+
+            const url = `http://127.0.0.1:5000/admin-update-book`;
+
+            const data = {
+                BooksTitle: bookTitle,
+                available_copies: availableCopies
+            };
+
+            fetch(url, {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Book updated successfully.") {
+                    responseMessage.textContent = "Book updated successfully!";
+                    responseMessage.className = 'success';
+                } else {
+                    responseMessage.textContent = data.message;
+                    responseMessage.className = 'error';
+                }
+            })
+            .catch(error => {
+                responseMessage.textContent = "Error: Unable to update book.";
+                responseMessage.className = 'error';
+            });
+        });
+    </script>
+</body>
+</html>

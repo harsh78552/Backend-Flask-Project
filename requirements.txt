@@ -1,0 +1,8 @@
+flask~=3.0.3
+python-dotenv
+flask-smorest
+marshmallow~=3.25.1
+pyodbc
+flask-jwt-extended
+Flask-Mail
+cloudinary

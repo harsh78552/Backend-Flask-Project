@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794') no-repeat center center/cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            color: white;
+            backdrop-filter: blur(3px);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: #FFD700;
+            font-size: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f0f0f0;
+            border-bottom: 3px solid #FFD700;
+            padding-bottom: 5px;
+        }
+
+        /* Main Content Styling */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            text-align: center;
+            margin-top: 120px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #FFD700;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .btn, .btn-link {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ffcc00, #ff6600);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ff9900, #cc3300);
+            transform: scale(1.05);
+        }
+
+        .btn-link {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #FFD700;
+        }
+
+        .btn-link:hover {
+            background: #FFD700;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        .btn:active, .btn-link:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer Styling */
+        footer {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 0;
+            color: #FFD700;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        footer a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#" class="logo">Library System</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+    <h2>Welcome to the Book Library</h2>
+    <button class="btn-link" onclick="location.href='../frontend/User/User.html'">User Registration</button>
+    <button class="btn-link" onclick="location.href='../frontend/User/USER_FRONTENED.html'">Book</button>
+    <button class="btn-link" onclick="location.href='../frontend/admin/admin.html'">Admin</button>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Library Management System. All Rights Reserved.</p>
+    <div class="footer-links">
+        <a href="https://github.com/harsh78552" target="_blank">GitHub</a> |
+        <a href="mailto:harsh844509@gmail.com">Gmail</a> |
+        <a href="https://www.linkedin.com/in/harsh-tiwari-10164b283" target="_blank">LinkedIn</a>
+    </div>
+</footer>
+
+</body>
+</html>
+

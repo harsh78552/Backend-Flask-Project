@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Student - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc0000;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Delete Student</h2>
+        <p id="message"></p>
+        <form id="deleteStudentForm">
+            <input type="email" id="email" name="email" placeholder="Enter Student Email" required>
+            <button type="submit">Delete Student</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("deleteStudentForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            let studentEmail = document.getElementById("email").value;
+
+            try {
+                let token = localStorage.getItem("jwt_token"); // Get JWT Token if stored
+
+                let response = await fetch("http://127.0.0.1:5000/admin-delete-student", {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ email: studentEmail })
+                });
+
+                let result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById("message").textContent = result.message;
+                    document.getElementById("message").style.color = "green";
+                } else {
+                    document.getElementById("message").textContent = result.message || "Error deleting student.";
+                    document.getElementById("message").style.color = "red";
+                }
+
+                // Clear form on success
+                document.getElementById("deleteStudentForm").reset();
+            } catch (error) {
+                document.getElementById("message").textContent = "Error connecting to server.";
+                document.getElementById("message").style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>
